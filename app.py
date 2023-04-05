@@ -9,7 +9,7 @@ decoded_data={20: 'rice', 11: 'maize', 3: 'chickpea', 9: 'kidneybeans', 18: 'pig
 
 @app.route('/')
 def home():
-    return render_template('index_1.html')
+    return render_template('index.html')
 
 @app.route('/predict',methods=['POST'])
 def predict():
