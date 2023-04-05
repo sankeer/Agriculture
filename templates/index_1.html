@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<style>
+body{text-align: center}
+table,tr,td{
+
+  width:13% ;
+  height:20px;
+  margin:auto;
+  font-size:auto ;
+  text-align: center;
+  border:2px solid #000;
+}
+tr{
+  background: white;
+  padding: 30px;
+}
+</style>
+<head>
+  <meta charset="utf-8">
+  <title>CROP PREDICTION USING MACHINE LEARNING</title>
+</head>
+  <body background="https://agriculture-crop-predict.000webhostapp.com/photo.jpg">
+<h1><strong>CROP PREDICTION USING MACHINE LEARNING</strong></h1>
+<br></br>
+
+<?php
+$servername="localhost";
+$dbname="id19921303_crop_prediction";
+$username="id19921303_agriculture";
+$password="}@W)F)Z5Lisj\TU4";
+
+$conn = new mysqli($servername,$username,$password,$dbname);
+if($conn->connect_error)
+{
+  die("connect failed: ".$conn->connect_error);
+}
+
+$sql = "SELECT TEMPERATURE,  HUMIDITY,  PH,  RAINFALL FROM PARAMETERS ORDER BY ID DESC LIMIT 1";
+
+echo '';
+
+if ($result = $conn->query($sql)) {
+    while ($row = $result->fetch_assoc()) {
+       // $row_ID = $row["ID"];
+        $row_TEMPARATURE = $row["TEMPERATURE"];
+        $row_HUMIDITY = $row["HUMIDITY"];
+        $row_PH = $row["PH"];
+        $row_RAINFALL = $row["RAINFALL"];
+        //$row_reading_time = $row["reading_time"];
+
+
+        echo '<form method="post" action="/predict">
+<label>TEMPERATURE</label><br>
+<table> <tr><td> '. $row_TEMPARATURE .' </td></tr></table>
+<label>HUMIDITY</label><br>
+<table> <tr><td> '. $row_HUMIDITY .' </td></tr></table>
+<label>PH</label><br>
+<table> <tr><td> '. $row_PH .'  </td></tr></table>
+<label>RAINFALL</label><br>
+<table> <tr><td> '. $row_RAINFALL.' </td></tr></table>
+<label>N</label><br>
+<table> <tr><td> '. $row_RAINFALL.' </td></tr></table>
+<label>P</label><br>
+<table> <tr><td> '. $row_RAINFALL.' </td></tr></table>
+<label>K</label><br>
+<table> <tr><td> '. $row_RAINFALL.' </td></tr></table>
+<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+</form> ';
+    }
+    $result->free();
+}
+ $conn -> close();
+?>
+</body>
+</html>
